@@ -5,7 +5,7 @@ import './Header.css';
 
 const Header = () => {
   const { user, admin, logout } = useAuth();
-  const [showLoginOptions, setShowLoginOptions] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -14,11 +14,16 @@ const Header = () => {
   };
 
   const handleLoginClick = () => {
-    setShowLoginOptions(!showLoginOptions);
+    setShowLoginModal(true);
   };
 
-  const closeLoginOptions = () => {
-    setShowLoginOptions(false);
+  const closeLoginModal = () => {
+    setShowLoginModal(false);
+  };
+
+  const navigateToLogin = (path: string) => {
+    setShowLoginModal(false);
+    navigate(path);
   };
 
   return (
@@ -34,17 +39,6 @@ const Header = () => {
               <button onClick={handleLoginClick} className="login-button">
                 登录
               </button>
-              
-              {showLoginOptions && (
-                <div className="login-options">
-                  <Link to="/login/user" onClick={closeLoginOptions} className="login-option">
-                    用户登录
-                  </Link>
-                  <Link to="/login/admin" onClick={closeLoginOptions} className="login-option">
-                    管理员登录
-                  </Link>
-                </div>
-              )}
             </div>
           ) : (
             <div className="user-info">
@@ -69,6 +63,32 @@ const Header = () => {
           )}
         </div>
       </div>
+
+      {/* 登录模态框 */}
+      {showLoginModal && (
+        <div className="login-modal-overlay" onClick={closeLoginModal}>
+          <div className="login-modal" onClick={e => e.stopPropagation()}>
+            <h3>选择登录方式</h3>
+            <div className="login-modal-options">
+              <button 
+                className="login-modal-option user-login" 
+                onClick={() => navigateToLogin('/login/user')}
+              >
+                用户登录
+              </button>
+              <button 
+                className="login-modal-option admin-login" 
+                onClick={() => navigateToLogin('/login/admin')}
+              >
+                管理员登录
+              </button>
+            </div>
+            <button className="login-modal-close" onClick={closeLoginModal}>
+              关闭
+            </button>
+          </div>
+        </div>
+      )}
     </header>
   );
 };
