@@ -1,0 +1,2 @@
+import React, { useState, useEffect } from 'react'; import { Link, useNavigate, useLocation } from 'react-router-dom'; import { useAuth } from '../context/AuthContext'; import './Header.css';
+const Header = () => { const { user, admin, logout } = useAuth(); const [showLoginModal, setShowLoginModal] = useState(false); const [locationFilter, setLocationFilter] = useState(''); const [hideApplied, setHideApplied] = useState(false); const navigate = useNavigate(); const location = useLocation();

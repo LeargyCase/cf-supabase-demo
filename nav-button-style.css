@@ -1,0 +1,3 @@
+.nav-links .nav-button { background: none; border: none; color: white; font-size: 1rem; font-weight: 500; padding: 0.5rem 0; cursor: pointer; position: relative; transition: all 0.2s; }
+.nav-links .nav-button:hover { color: #e2e8f0; }
+.nav-links .nav-button.active { color: #60a5fa; font-weight: 600; }
